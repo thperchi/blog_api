@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+    database:
+        image: 'mysql:latest'
+        environment:
+            MYSQL_ROOT_USER: root
+            MYSQL_DATABASE: blog_api
+            MYSQL_ROOT_HOST: '%'
+        ports:
+            - '3306'
+
+    phpmyadmin:
+        depends_on:
+            - database
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: database
